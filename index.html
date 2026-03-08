@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrestaMais - Profissionais Qualificados em Foz do Iguaçu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Cores da logo PrestaMais */
+            --primary: #2D6E4F;      /* Verde escuro do shield */
+            --secondary: #4CAF50;     /* Verde médio */
+            --accent: #66BB6A;        /* Verde claro do check */
+            --dark: #1a1a1a;          /* Preto */
+            --gray: #6B7280;          /* Cinza da casa */
+            --light: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, var(--primary) 100%);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(102, 187, 106, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .logo {
+            max-width: 140px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: clamp(1.75rem, 5vw, 2.75rem);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.75rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            max-width: 650px;
+            margin: 1.25rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Stats */
+        .stat {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem auto;
+            max-width: 420px;
+        }
+
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .stat-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+            line-height: 1.4;
+        }
+
+        /* CTAs */
+        .cta-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem auto 0;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .cta-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .cta-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cta-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .cta-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--primary);
+        }
+
+        .cta-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+
+        /* Section */
+        .section {
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .problem {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .quote {
+            border-left: 4px solid var(--accent);
+            padding-left: 1.25rem;
+            margin: 1.25rem 0;
+            font-style: italic;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .benefit-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        /* Mission Section */
+        .mission {
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .mission h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            color: var(--accent);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .mission-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mission-item h3 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            max-width: 120px;
+            margin: 0 auto 1rem;
+            filter: brightness(0) invert(1);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 85vh;
+                padding: 1rem;
+            }
+
+            .logo {
+                max-width: 120px;
+            }
+
+            .cta-container {
+                grid-template-columns: 1fr;
+                gap: 0.875rem;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .video-container {
+                margin: 1rem auto;
+                border-radius: 10px;
+            }
+
+            .stat {
+                padding: 0.875rem 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem 1rem;
+            }
+
+            .benefits {
+                gap: 1rem;
+            }
+
+            .benefit-card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <img src="logo_prestamais.png" alt="PrestaMais" class="logo">
+        
+        <div class="hero-content">
+            <h1>
+                Profissionais <span class="highlight">Qualificados</span><br>
+                Para o Seu Lar
+            </h1>
+            <p class="subtitle">
+                Em Foz do Iguaçu, conectamos quem precisa de serviços com profissionais verificados e capacitados
+            </p>
+
+            <!-- Vídeo Institucional -->
+            <div class="video-container">
+                <video controls poster="video-thumb.jpg">
+                    <source src="video_institucional.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number">57%</div>
+                <div class="stat-text">das mulheres tiveram experiências negativas com prestadores desconhecidos</div>
+            </div>
+
+            <div class="cta-container">
+                <a href="#form-cliente" class="cta-card">
+                    <span class="cta-emoji">🏠</span>
+                    <div class="cta-title">Preciso de Serviço</div>
+                    <div class="cta-desc">Encontre profissionais confiáveis para sua casa</div>
+                </a>
+
+                <a href="#form-profissional" class="cta-card">
+                    <span class="cta-emoji">🔧</span>
+                    <div class="cta-title">Sou Profissional</div>
+                    <div class="cta-desc">Cadastre-se e encontre clientes que valorizam seu trabalho</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; color: var(--primary);">
+            Por Que o PrestaMais?
+        </h2>
+        <p style="text-align: center; font-size: 1rem; color: #666; max-width: 650px; margin: 0 auto 2rem; line-height: 1.6;">
+            <strong>57% das mulheres em Foz</strong> tiveram experiências negativas com prestadores. 
+            Criamos uma solução: <strong>profissionais verificados, avaliados e em constante capacitação</strong>.
+        </p>
+        
+        <div class="benefits">
+            <div class="benefit-card">
+                <h3>🛡️ Segurança</h3>
+                <p>Profissionais verificados e avaliados</p>
+            </div>
+
+            <div class="benefit-card">
+                <h3>🎓 Formação</h3>
+                <p>Capacitamos continuamente, com foco em mulheres</p>
+            </div>
+
+            <div class="benefit-card">
+                <h3>⭐ Qualidade</h3>
+                <p>Garantia de trabalho bem feito</p>
+            </div>
+
+            <div class="benefit-card">
+                <h3>👥 Escolha</h3>
+                <p>Você escolhe quem prefere contratar</p>
+            </div>
+        </div>
+
+        <div style="background: var(--primary); color: white; border-radius: 16px; padding: 2rem; margin: 2rem 0; text-align: center;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent);">🎯 Nossa Meta 2026</h3>
+            <p style="font-size: 1.05rem; opacity: 0.95; line-height: 1.6;">
+                Formar <strong>70% de profissionais mulheres</strong> até dezembro. 
+                Hoje cadastramos homens e mulheres, mas nosso foco é <strong>empoderar cada vez mais mulheres</strong> em profissões tradicionalmente masculinas.
+            </p>
+        </div>
+    </section>
+
+    <section class="section" id="form-cliente" style="background: white; border-radius: 16px; padding: 2rem 1.5rem;">
+        <h2 style="text-align: center; font-size: 1.75rem; margin-bottom: 0.5rem; color: var(--primary);">
+            🏠 Preciso de Serviço
+        </h2>
+        <p style="text-align: center; font-size: 0.95rem; color: #666; margin-bottom: 1.5rem;">
+            Conectamos você com profissionais verificados
+        </p>
+        
+        <div style="max-width: 500px; margin: 0 auto; background: var(--light); padding: 1.25rem; border-radius: 12px;">
+            <a href="LINK_FORM_CLIENTES_AQUI" target="_blank" 
+               style="display: block; background: var(--primary); color: white; padding: 0.875rem 1.5rem; border-radius: 10px; text-align: center; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s;">
+                Cadastrar Interesse →
+            </a>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: #888; text-align: center;">
+                ⏱️ Apenas 2 minutos
+            </p>
+        </div>
+    </section>
+
+    <section class="section" id="form-profissional" style="background: var(--primary); border-radius: 16px; padding: 2rem 1.5rem; color: white;">
+        <h2 style="text-align: center; font-size: 1.75rem; margin-bottom: 0.5rem; color: var(--accent);">
+            🔧 Sou Profissional
+        </h2>
+        <p style="text-align: center; font-size: 0.95rem; opacity: 0.95; margin-bottom: 1.5rem;">
+            Cadastre-se e encontre clientes que valorizam seu trabalho
+        </p>
+        
+        <div style="max-width: 500px; margin: 0 auto; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2);">
+            <p style="opacity: 0.95; margin-bottom: 1rem; font-size: 0.9rem; background: rgba(102, 187, 106, 0.2); padding: 0.75rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+                💡 <strong>Experientes:</strong> Torne-se mentor(a) e ganhe mais!
+            </p>
+            <a href="https://docs.google.com/forms/d/1Ud834Xz2TyqCh-L7uF7Gi4Vzm_eQ1ma10YynmRITxxg/edit" target="_blank" 
+               style="display: block; background: white; color: var(--primary); padding: 0.875rem 1.5rem; border-radius: 10px; text-align: center; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s;">
+                Cadastrar Agora →
+            </a>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.85; text-align: center;">
+                ✨ 100% gratuito
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <img src="logo_prestamais.png" alt="PrestaMais" class="footer-logo">
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.25rem; color: var(--accent);">PrestaMais</h3>
+        <p style="margin-top: 0.25rem; opacity: 0.7; font-size: 0.9rem;">Profissionais qualificados para o seu lar</p>
+        <p style="margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.5;">
+            Foz do Iguaçu, PR • Startup Weekend 2026
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Hover effect nos CTAs
+        document.querySelectorAll('.cta-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = getComputedStyle(document.documentElement)
+                    .getPropertyValue('--accent').trim();
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'transparent';
+            });
+        });
+    </script>
+</body>
+</html>
