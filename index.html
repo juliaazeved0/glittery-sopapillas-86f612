@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dona - Mulheres Recomendando Profissionais para Mulheres</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #5a0000;      /* Vinho escuro */
+            --secondary: #8B0000;     /* Vinho médio */
+            --accent: #DC143C;        /* Vermelho crimson */
+            --light: #FFF5F5;         /* Rosa muito claro */
+            --dark: #2D0000;          /* Quase preto vinho */
+            --gray: #6B7280;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(220, 20, 60, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .brand {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-weight: 800;
+            color: white;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            margin-top: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            max-width: 650px;
+            margin: 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(90, 0, 0, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        /* CTA */
+        .cta-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.3);
+            margin-top: 1rem;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.5);
+            background: #FF1744;
+        }
+
+        /* How it Works */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .how-it-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(90, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--accent);
+        }
+
+        .step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(90, 0, 0, 0.15);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: var(--primary);
+            color: white;
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+
+        .problem h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.25rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-highlight {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            opacity: 0.95;
+        }
+
+        .insight {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent);
+            font-style: italic;
+        }
+
+        /* Community */
+        .community {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 40px rgba(90, 0, 0, 0.1);
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .community-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .community-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .community-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 90vh;
+                padding: 1.5rem 1rem;
+            }
+
+            .brand h1 {
+                font-size: 3rem;
+            }
+
+            .how-it-works {
+                gap: 1.5rem;
+            }
+
+            .step {
+                padding: 1.5rem;
+            }
+
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .problem {
+                padding: 2rem 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="brand">
+            <h1>Dona</h1>
+            <p class="tagline">De mulher para mulher</p>
+        </div>
+
+        <div class="hero-content">
+            <h2 class="hero-title">
+                A Comunidade de Recomendações<br>que Você Pode Confiar
+            </h2>
+            <p class="hero-subtitle">
+                Encontre profissionais de confiança através de recomendações de outras mulheres. 
+                Porque a melhor indicação vem de quem já contratou.
+            </p>
+
+            <!-- Vídeo Institucional -->
+            <div class="video-container">
+                <video controls poster="video-thumb.jpg">
+                    <source src="video_institucional.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+            </div>
+
+            <a href="#cadastro" class="cta-primary">Quero Recomendar ou Buscar →</a>
+        </div>
+    </section>
+
+    <!-- O Problema -->
+    <section class="section">
+        <div class="problem">
+            <h2>O Problema que Toda Mulher Conhece</h2>
+            
+            <div class="stat-highlight">
+                <div class="stat-number">57%</div>
+                <div class="stat-text">
+                    das mulheres tiveram experiências negativas com prestadores desconhecidos
+                </div>
+            </div>
+
+            <div class="insight">
+                "Chuveiro queimado há muito tempo sem conserto, porque se sente desconfortável"
+            </div>
+
+            <div class="insight">
+                "Preciso esperar meu marido/pai/irmão estar em casa para chamar o profissional"
+            </div>
+
+            <div class="insight">
+                "Não sei em quem confiar. Sempre peço indicação para amigas."
+            </div>
+
+            <p style="text-align: center; font-size: 1.15rem; margin-top: 2rem; opacity: 0.95; line-height: 1.7;">
+                <strong>Dona</strong> é a solução: uma comunidade onde <strong>mulheres recomendam profissionais</strong> 
+                que elas mesmas contrataram e confiaram. Simples. Seguro. Entre nós.
+            </p>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section class="section">
+        <h2 class="section-title">Como Funciona</h2>
+        <p class="section-subtitle">
+            Um sistema de recomendações onde a confiança é construída entre mulheres
+        </p>
+
+        <div class="how-it-works">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Você Precisa</h3>
+                <p>Precisa de um eletricista, encanador, pintor? Acesse a Dona e busque recomendações na sua região.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Mulheres Recomendam</h3>
+                <p>Veja profissionais recomendados por outras mulheres que já contrataram. Nome, serviço, avaliação real.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Você Contrata</h3>
+                <p>Escolha baseado em recomendações reais. Contrate com confiança. Depois, recomende também!</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Comunidade Cresce</h3>
+                <p>Cada mulher que recomenda fortalece a rede. Quanto mais participamos, mais seguras ficamos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por Que Funciona -->
+    <section class="section">
+        <div class="community">
+            <h2 class="section-title">Por Que Isso Funciona?</h2>
+            <p class="section-subtitle">
+                Resolvemos o problema real: mulheres já terceirizam decisões de manutenção para homens da família. 
+                Agora, terceirizamos para <strong>outras mulheres</strong>.
+            </p>
+
+            <div class="community-grid">
+                <div class="community-card">
+                    <h3>🤝 Confiança Real</h3>
+                    <p>Não é anúncio. É sua vizinha, amiga, colega dizendo: "Eu contratei e foi ótimo".</p>
+                </div>
+
+                <div class="community-card">
+                    <h3>💬 Linguagem Nossa</h3>
+                    <p>Mulheres avaliando como mulheres: "Foi pontual?", "Respeitoso?", "Preço justo?"</p>
+                </div>
+
+                <div class="community-card">
+                    <h3>🔒 Segurança</h3>
+                    <p>Profissionais validados por outras mulheres que já os deixaram entrar em casa.</p>
+                </div>
+
+                <div class="community-card">
+                    <h3>🌱 Cresce Junto</h3>
+                    <p>Quanto mais mulheres participam, mais forte fica a comunidade. É nosso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="section">
+        <div class="cta-section" id="cadastro">
+            <h2>Faça Parte da Dona</h2>
+            <p>
+                Seja para buscar uma recomendação ou para recomendar um profissional que você confia, 
+                você fortalece uma comunidade de mulheres ajudando mulheres.
+            </p>
+
+            <div class="cta-buttons">
+                <a href="LINK_FORM_RECOMENDAR" class="cta-button cta-button-primary">
+                    💜 Quero Recomendar um Profissional
+                </a>
+                <a href="LINK_FORM_BUSCAR" class="cta-button cta-button-secondary">
+                    🔍 Buscar Recomendações
+                </a>
+            </div>
+
+            <p style="margin-top: 2rem; opacity: 0.9; font-size: 0.95rem;">
+                ✨ Participação 100% gratuita • De mulher para mulher
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">Dona</div>
+        <p style="opacity: 0.8; margin-bottom: 0.5rem;">Mulheres recomendando profissionais para mulheres</p>
+        <p style="opacity: 0.6; font-size: 0.9rem;">Foz do Iguaçu, PR • Startup Weekend 2026</p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
